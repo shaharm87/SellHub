@@ -12,10 +12,17 @@ class UserManager {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    updateDisplayName("test", callback)
-                } else {
+                    updateDisplayName("test", callback) // User registered successfully
+                } else { // error occurred during user registration
                     val exception = task.exception as FirebaseAuthException
-                    callback(false, exception.message)
+                    when (exception.errorCode) {
+                        "ERROR_INVALID_EMAIL" -> callback(false, "Invalid Email")
+                        "ERROR_EMAIL_ALREADY_IN_USE" -> callback(false, "Email already exists")
+                        "ERROR_WEAK_PASSWORD" -> callback(false, "Password must be at least 6 characters")
+                        else -> {
+                            callback(false, exception.message)
+                        }
+                    }
                 }
             }
     }
@@ -24,10 +31,14 @@ class UserManager {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    callback(true, null) // User registered successfully
-                } else {
+                    callback(true, null) // User logged in successfully
+                } else { // error occurred during user logging in
                     val exception = task.exception as FirebaseAuthException
-                    callback(false, exception.message) // Registration failed
+                    when (exception.errorCode) {
+                        "ERROR_INVALID_CREDENTIAL" -> callback(false, "Wrong email or password")
+                        "ERROR_INVALID_EMAIL" -> callback(false, "Invalid email")
+                        else -> callback(false, exception.message)
+                    }
                 }
             }
     }

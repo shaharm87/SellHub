@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "767701377795",
+    "firebase_url": "https://sellhub-a712e-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "sellhub-a712e",
+    "storage_bucket": "sellhub-a712e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767701377795:android:554f287b3b83a11223bf36",
+        "android_client_info": {
+          "package_name": "com.company.sellhub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9C4PXVpdWNnwSEfmcmUa6FureInveD8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767701377795:android:49b0b2ceb82e479923bf36",
+        "android_client_info": {
+          "package_name": "com.example.sellhub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9C4PXVpdWNnwSEfmcmUa6FureInveD8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

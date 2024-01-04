@@ -1,5 +1,6 @@
 package com.example.sellhub
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -24,10 +25,10 @@ class Register : AppCompatActivity() {
             val password = findViewById<TextInputEditText>(R.id.reg_password).text.toString()
             userManager.registerUser(email, password) { isSuccess, errorMessage ->
                 if (isSuccess) {
-                    // Registration successful
                     Toast.makeText(this, "User registered successfully!", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
                 } else {
-                    // Registration failed
                     Toast.makeText(this, "Registration failed: $errorMessage", Toast.LENGTH_SHORT)
                         .show()
                 }

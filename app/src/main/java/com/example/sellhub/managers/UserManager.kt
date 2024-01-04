@@ -48,4 +48,8 @@ class UserManager {
                 }
             }
     }
+
+    fun isUserLogged(): Boolean {
+        return auth.currentUser != null;
+    }
 }

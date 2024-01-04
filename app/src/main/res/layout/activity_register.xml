@@ -64,12 +64,13 @@
         android:layout_height="wrap_content"
         android:text="@string/go"
         android:transitionName="button_tran"
-        android:onClick="onButtonClick"
+        android:onClick="onGoClick"
         />
     <Button
         android:id="@+id/reg_login_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/already_have_an_account_login"
-        android:transitionName="button_tran"/>
+        android:transitionName="button_tran"
+        android:onClick="onLoginClick" />
 </LinearLayout>

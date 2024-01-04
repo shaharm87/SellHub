@@ -1,5 +1,6 @@
 package com.example.sellhub
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,16 +19,16 @@ class Register : AppCompatActivity() {
         setContentView(R.layout.activity_register)
     }
 
-    fun onButtonClick(view: View) {
+    fun onGoClick(view: View) {
         try {
             val email = findViewById<TextInputEditText>(R.id.reg_email).text.toString()
             val password = findViewById<TextInputEditText>(R.id.reg_password).text.toString()
             userManager.registerUser(email, password) { isSuccess, errorMessage ->
                 if (isSuccess) {
-                    // Registration successful
                     Toast.makeText(this, "User registered successfully!", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
                 } else {
-                    // Registration failed
                     Toast.makeText(this, "Registration failed: $errorMessage", Toast.LENGTH_SHORT)
                         .show()
                 }
@@ -37,4 +38,23 @@ class Register : AppCompatActivity() {
             Log.d("Tag", e.message.toString());
         }
     }
+
+    fun onLoginClick(view: View) {
+        try {
+            val email = findViewById<TextInputEditText>(R.id.reg_email).text.toString()
+            val password = findViewById<TextInputEditText>(R.id.reg_password).text.toString()
+            userManager.loginUser(email, password) { isSuccess, errorMessage ->
+                if (isSuccess) {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(this, "Login failed: $errorMessage", Toast.LENGTH_SHORT).show()
+                }
+            }
+        } catch (e: Exception) {
+            Log.d("Tag", e.message.toString());
+        }
+    }
+
+
 }

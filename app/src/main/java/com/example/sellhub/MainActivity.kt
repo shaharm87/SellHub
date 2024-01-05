@@ -13,6 +13,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity() {
 
     private val userManager = UserManager() // Initialize UserManager
+    private val homeFragment = Home();
+    private val addItemFragment = AddItem();
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,19 +28,23 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.home -> {
-                    replaceFragment(Home())
+                    replaceFragment(homeFragment)
                     true
                 }
+
                 R.id.add -> {
-                    replaceFragment(AddItem())
+                    replaceFragment(addItemFragment)
                     true
                 }
+
                 R.id.profile -> {
                     true
                 }
+
                 else -> false
             }
         }
+        replaceFragment(homeFragment)
     }
 
     private fun replaceFragment(fragment: Fragment) {

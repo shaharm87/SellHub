@@ -12,9 +12,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    private val userManager = UserManager() // Initialize UserManager
-    private val homeFragment = Home();
-    private val addItemFragment = AddItem();
+    private val userManager = UserManager()
+    private val homeFragment = Home()
+    private val addItemFragment = AddItem()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

@@ -35,7 +35,7 @@ class Home : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val x=5
+
             }
         })
 

@@ -2,19 +2,22 @@ package com.example.sellhub
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract.Profile
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.sellhub.home.Home
 import com.example.sellhub.managers.UserManager
 import com.example.sellhub.newitem.AddItem
+import com.example.sellhub.profile.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
 
     private val userManager = UserManager() // Initialize UserManager
-    private val homeFragment = Home();
-    private val addItemFragment = AddItem();
+    private val homeFragment = Home()
+    private val addItemFragment = AddItem()
+    private val profileFragment = ProfileFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,6 +41,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.profile -> {
+                    replaceFragment(profileFragment)
                     true
                 }
 

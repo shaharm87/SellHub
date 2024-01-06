@@ -3,6 +3,7 @@ package com.example.sellhub.managers
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 
 class UserManager {
@@ -62,5 +63,9 @@ class UserManager {
 
     fun isUserLogged(): Boolean {
         return auth.currentUser != null;
+    }
+
+    fun getCurrentUser(): FirebaseUser? {
+        return auth.currentUser
     }
 }

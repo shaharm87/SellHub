@@ -22,18 +22,19 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="141dp"
                 android:orientation="vertical"
                 android:padding="16dp">
 
                 <!-- Title, secondary and supporting text -->
+
                 <TextView
                     android:id="@+id/card_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Test headline"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    />
+                    android:textAppearance="?attr/textAppearanceHeadline6" />
+
                 <TextView
                     android:id="@+id/card_description"
                     android:layout_width="wrap_content"
@@ -41,8 +42,13 @@
                     android:layout_marginTop="8dp"
                     android:text="text description"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
-                    />
+                    android:textColor="?android:attr/textColorSecondary" />
+
+                <TextView
+                    android:id="@+id/card_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="User Name" />
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

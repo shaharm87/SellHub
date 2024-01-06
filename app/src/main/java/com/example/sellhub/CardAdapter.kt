@@ -25,6 +25,7 @@ class CardAdapter(private val cardList: List<CardData>) :
 
         holder.titleTextView.text = currentItem.item.title
         holder.descriptionTextView.text = currentItem.item.description
+        holder.displayNameTextView.text = currentItem.item.displayName
     }
 
     override fun getItemCount(): Int {
@@ -36,5 +37,6 @@ class CardAdapter(private val cardList: List<CardData>) :
         // Views in your card layout
         val titleTextView: TextView = itemView.findViewById(R.id.card_header)
         val descriptionTextView: TextView = itemView.findViewById(R.id.card_description)
+        val displayNameTextView: TextView = itemView.findViewById(R.id.card_user_name)
     }
 }

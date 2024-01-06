@@ -15,10 +15,11 @@ class HomeViewModel : ViewModel() {
                 for (document in documents) {
                     val data = document.data
                     val id = document.id
+                    val displayName = data["displayName"] as String
                     val title = data["title"] as String
                     val description = data["description"] as String
 
-                    val item = Item(title, description)
+                    val item = Item(displayName, title, description)
                     items.add(item)
                 }
                 callback(true, items)

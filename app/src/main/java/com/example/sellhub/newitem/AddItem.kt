@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import com.example.sellhub.R
+import com.example.sellhub.managers.UserManager
 import com.google.android.material.textfield.TextInputEditText
 
 class AddItem : Fragment() {
@@ -21,6 +22,7 @@ class AddItem : Fragment() {
     private lateinit var titleEditText: TextInputEditText
     private lateinit var descriptionEditText: TextInputEditText
     private lateinit var submitButton: Button
+    private val userManager = UserManager()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +42,8 @@ class AddItem : Fragment() {
     private fun onSubmitClicked() {
         val title = titleEditText.text.toString()
         val description = descriptionEditText.text.toString()
-        val item = Item(title, description)
+        val userDisplayName = userManager.getCurrentUser()
+        val item = Item(userDisplayName?.displayName, title, description)
         viewModel.uploadItemToFirestore(item) { isSuccess, errorMessage ->
             if (!isSuccess) {
                 Toast.makeText(

@@ -18,6 +18,7 @@
                 android:layout_height="194dp"
                 app:srcCompat="@drawable/profile_icon"
                 android:scaleType="centerCrop"
+                android:id="@+id/card_image"
                 />
 
             <LinearLayout

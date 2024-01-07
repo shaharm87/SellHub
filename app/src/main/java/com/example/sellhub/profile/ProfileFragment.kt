@@ -17,6 +17,7 @@ class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
     private val cardList = mutableListOf<CardData>()
     private val adapter = CardAdapter(cardList)
+
     companion object {
         fun newInstance() = ProfileFragment()
     }
@@ -35,15 +36,15 @@ class ProfileFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
-        SetCardsData()
+        setCardsData()
     }
 
-    private fun SetCardsData() {
+    private fun setCardsData() {
         viewModel.getItems { success, items ->
             if (success) {
                 val newCards = mutableListOf<CardData>();
                 for (item in items) {
-                    newCards.add(CardData(item))
+                    newCards.add(CardData(item, null))
                 }
                 cardList.clear()
                 cardList.addAll(newCards)
@@ -51,5 +52,4 @@ class ProfileFragment : Fragment() {
             }
         }
     }
-
 }

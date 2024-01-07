@@ -12,6 +12,7 @@ import com.example.sellhub.CardAdapter
 import com.example.sellhub.CardData
 import com.example.sellhub.R
 import com.example.sellhub.newitem.Item
+import com.example.sellhub.services.StorageService
 
 class Home : Fragment() {
 
@@ -33,34 +34,33 @@ class Home : Fragment() {
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val x=5
-            }
-        })
-
-
         return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        SetCardsData()
+        setCardsData()
     }
 
-    private fun SetCardsData() {
+    private fun setCardsData() {
         viewModel.getItems { success, items ->
             if (success) {
-                val newCards = mutableListOf<CardData>();
-                for (item in items) {
-                    newCards.add(CardData(item))
-                }
                 cardList.clear()
-                cardList.addAll(newCards)
-                adapter.notifyDataSetChanged()
+                for (item in items) {
+                    val cardData = CardData(item, null)
+                    cardList.add(cardData)
+                    adapter.notifyItemChanged(cardList.indexOf(cardData))
+                    if (item.imageId != null) {
+                        StorageService.downloadImage(cardData.item.imageId.toString()) { success, imageBit ->
+                            if (success) {
+                                cardData.image = imageBit
+                                adapter.notifyItemChanged(cardList.indexOf(cardData))
+                            }
+                        }
+                    }
+                }
             }
         }
     }
-
 }

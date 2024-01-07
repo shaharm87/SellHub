@@ -20,7 +20,9 @@ import androidx.core.content.ContextCompat
 import com.example.sellhub.R
 import com.example.sellhub.managers.UserManager
 import com.example.sellhub.services.StorageService
+import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textview.MaterialTextView
 import java.io.IOException
 
 class AddItem : Fragment() {
@@ -34,6 +36,8 @@ class AddItem : Fragment() {
     private lateinit var descriptionEditText: TextInputEditText
     private lateinit var submitButton: Button
     private lateinit var imageView: ImageView
+    private lateinit var chipGroup: ChipGroup
+    private lateinit var errorEditText: MaterialTextView
     private var selectedImage: Uri? = null
 
     private val userManager = UserManager()
@@ -50,6 +54,8 @@ class AddItem : Fragment() {
         descriptionEditText = view.findViewById(R.id.descriptionEditText)
         submitButton = view.findViewById(R.id.submitButton)
         imageView = view.findViewById(R.id.imageViewSelectImages)
+        chipGroup = view.findViewById(R.id.chipGroup)
+        errorEditText = view.findViewById(R.id.errorTextView)
 
         submitButton.setOnClickListener {
             onSubmitClicked()
@@ -64,17 +70,22 @@ class AddItem : Fragment() {
         val title = titleEditText.text.toString()
         val description = descriptionEditText.text.toString()
         val userDisplayName = userManager.getCurrentUser()
+        val selectedTypes = viewModel.getSelectedChipTexts(chipGroup)
+
+        if (!validatePostForm(title, description, selectedImage, chipGroup.checkedChipIds))
+            return
+
         StorageService.uploadFileToFirebaseStorage(selectedImage!!) { isSuccess, imageId ->
             if (isSuccess) {
-                val item = Item(userDisplayName?.displayName, title, description, imageId)
+                val item =
+                    Item(userDisplayName?.displayName, title, description, imageId, selectedTypes)
                 viewModel.uploadItemToFirestore(item) { isSuccess, errorMessage ->
                     if (!isSuccess) {
                         Toast.makeText(
                             requireContext(),
                             "Failed to post the item",
                             Toast.LENGTH_SHORT
-                        )
-                            .show()
+                        ).show()
                     }
                 }
             }
@@ -122,5 +133,38 @@ class AddItem : Fragment() {
         } else {
             openGalleryForImage() // Permission already granted, open gallery
         }
+    }
+
+    fun validatePostForm(title: String?, description: String?, image: Uri?, selectedType: List<Int>?): Boolean {
+        if (viewModel.validateImage(image)) {
+            errorEditText.visibility = View.GONE
+        } else {
+            errorEditText.visibility = View.VISIBLE
+            errorEditText.text = "Please select image"
+            return false
+        }
+
+        if (viewModel.validateText(title)) {
+            titleEditText.error = null
+        } else {
+            titleEditText.error = "Title cannot be empty"
+            return false
+        }
+
+        if (viewModel.validateText(description)) {
+            descriptionEditText.error = null
+        } else {
+            descriptionEditText.error = "Description cannot be empty"
+            return false
+        }
+
+        if (viewModel.validateTypeSelection(selectedType)) {
+            errorEditText.visibility = View.GONE
+        } else {
+            errorEditText.visibility = View.VISIBLE
+            errorEditText.text = "Please select type"
+            return false
+        }
+        return true
     }
 }

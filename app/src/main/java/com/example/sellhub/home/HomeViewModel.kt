@@ -1,6 +1,5 @@
 package com.example.sellhub.home
 
-import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import com.example.sellhub.newitem.Item
 import com.google.firebase.firestore.FirebaseFirestore
@@ -20,8 +19,10 @@ class HomeViewModel : ViewModel() {
                     val title = data["title"] as String
                     val description = data["description"] as String
                     val imageId = data["imageId"] as? String
+                    val types = data["types"] as? List<String>
 
-                    val item = Item(displayName, title, description, imageId)
+
+                    val item = Item(displayName, title, description, imageId, types)
                     items.add(item)
                 }
                 callback(true, items)

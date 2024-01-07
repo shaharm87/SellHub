@@ -53,8 +53,76 @@
         android:id="@+id/submitButton"
         android:layout_width="150dp"
         android:layout_height="50dp"
+        android:layout_below="@id/errorTextView"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Submit" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/descriptionTextInputLayout"
-        android:text="Submit"
-        android:layout_marginTop="10dp"/>
+        android:layout_centerHorizontal="true"
+        app:chipSpacing="8dp"
+        app:selectionRequired="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip1"
+            style="@style/Widget.MaterialComponents.Chip.Entry"
+            app:closeIconVisible="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Electronics"
+            app:chipIcon="@drawable/electronic"
+            />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip2"
+            style="@style/Widget.MaterialComponents.Chip.Entry"
+            app:closeIconVisible="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Furniture"
+            app:chipIcon="@drawable/bed" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip3"
+            style="@style/Widget.MaterialComponents.Chip.Entry"
+            app:closeIconVisible="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipIcon="@drawable/clothing"
+            android:text="Clothing" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip4"
+            style="@style/Widget.MaterialComponents.Chip.Entry"
+            app:closeIconVisible="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipIcon="@drawable/games"
+            android:text="Games" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip5"
+            style="@style/Widget.MaterialComponents.Chip.Entry"
+            app:closeIconVisible="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipIcon="@drawable/diamond"
+            android:text="Jewellery" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/errorTextView"
+        style="@style/Widget.MaterialComponents.TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chipGroup"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="Please select at least one option"
+        android:textColor="@color/design_default_color_error"
+        android:visibility="gone" />
 </RelativeLayout>

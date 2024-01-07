@@ -3,11 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/imageViewSelectImages"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/profile_icon" />
+
+
     <!-- Title EditText -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/titleTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/imageViewSelectImages"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp">
@@ -17,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Title"
-            android:inputType="text"/>
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Description EditText -->
@@ -36,15 +46,15 @@
             android:layout_height="wrap_content"
             android:hint="Description"
             android:inputType="textMultiLine"
-            android:minLines="3"/>
+            android:minLines="3" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/submitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="200dp"
-        android:text="Submit" />
+        android:layout_below="@id/descriptionTextInputLayout"
+        android:text="Submit"
+        android:layout_marginTop="10dp"/>
 </RelativeLayout>

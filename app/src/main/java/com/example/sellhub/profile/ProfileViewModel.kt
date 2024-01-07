@@ -17,12 +17,14 @@ class ProfileViewModel : ViewModel() {
                 for (document in documents) {
                     val data = document.data
                     val id = document.id
-                    val displayName = data["displayName"] as String
+                    val displayName = data["displayName"] as? String
                     val currentUser = userManager.getCurrentUser()
-                    if (displayName == currentUser?.displayName) {
+                    if (displayName == currentUser?.displayName && displayName != null) {
                         val title = data["title"] as String
                         val description = data["description"] as String
-                        val item = Item(displayName, title, description)
+                        val imageId = data["imageId"] as String?
+
+                        val item = Item(displayName, title, description, imageId)
                         items.add(item)
                     }
                 }

@@ -24,7 +24,8 @@ class Register : AppCompatActivity() {
         try {
             val email = findViewById<TextInputEditText>(R.id.reg_email).text.toString()
             val password = findViewById<TextInputEditText>(R.id.reg_password).text.toString()
-            userManager.registerUser(email, password) { isSuccess, errorMessage ->
+            val displayName = findViewById<TextInputEditText>(R.id.reg_display_name).text.toString()
+            userManager.registerUser(email, password, displayName) { isSuccess, errorMessage ->
                 if (isSuccess) {
                     Toast.makeText(this, "User registered successfully!", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, MainActivity::class.java)

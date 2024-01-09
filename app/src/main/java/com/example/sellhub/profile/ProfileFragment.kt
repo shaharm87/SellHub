@@ -12,6 +12,7 @@ import com.example.sellhub.CardAdapter
 import com.example.sellhub.CardData
 import com.example.sellhub.R
 import com.example.sellhub.home.HomeViewModel
+import com.example.sellhub.services.StorageService
 
 class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
@@ -44,7 +45,16 @@ class ProfileFragment : Fragment() {
             if (success) {
                 val newCards = mutableListOf<CardData>();
                 for (item in items) {
-                    newCards.add(CardData(item, null))
+                    val cardData = CardData(item, null)
+                    newCards.add(cardData)
+                    if (item.imageId != null) {
+                        StorageService.downloadImage(cardData.item.imageId.toString()) { success, imageBit ->
+                            if (success) {
+                                cardData.image = imageBit
+                                adapter.notifyItemChanged(cardList.indexOf(cardData))
+                            }
+                        }
+                    }
                 }
                 cardList.clear()
                 cardList.addAll(newCards)

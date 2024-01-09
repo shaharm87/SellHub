@@ -57,20 +57,32 @@
                 android:id="@+id/reg_password">
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/display_name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:id="@+id/reg_display_name" />
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
+
     <Button
         android:id="@+id/reg_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/register"
-        android:transitionName="button_tran"
         android:onClick="onRegisterClick"
-        />
+        android:text="@string/register"
+        android:transitionName="button_tran" />
+
     <Button
         android:id="@+id/reg_login_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="toLoginPage"
         android:text="@string/already_have_an_account_login"
-        android:transitionName="button_tran"
-        android:onClick="toLoginPage" />
+        android:transitionName="button_tran" />
 </LinearLayout>

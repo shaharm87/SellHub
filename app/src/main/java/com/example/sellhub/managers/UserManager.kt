@@ -9,16 +9,18 @@ import com.google.firebase.auth.UserProfileChangeRequest
 class UserManager {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
-    fun registerUser(email: String, password: String, callback: (Boolean, String?) -> Unit) {
+    fun registerUser(email: String, password: String, displayName: String, callback: (Boolean, String?) -> Unit) {
         if (email == "") {
             callback(false, "Missing email")
         } else if (password == "") {
             callback(false, "Missing password")
+        } else if (displayName == "") {
+            callback(false, "Missing Display Name")
         } else {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        updateDisplayName("test", callback) // User registered successfully
+                        updateDisplayName(displayName, callback)
                     } else { // error occurred during user registration
                         val exception = task.exception as FirebaseAuthException
                         when (exception.errorCode) {
@@ -43,7 +45,9 @@ class UserManager {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        callback(true, null) // User logged in successfully
+                        if (task.result?.user?.displayName !== "") {
+                            updateDisplayName(task.result.user?.displayName!!, callback) // User logged in successfully
+                        }
                     } else { // error occurred during user logging in
                         val exception = task.exception as FirebaseAuthException
                         when (exception.errorCode) {

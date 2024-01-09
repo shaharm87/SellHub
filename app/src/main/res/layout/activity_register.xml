@@ -62,9 +62,9 @@
         android:id="@+id/reg_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/go"
+        android:text="@string/register"
         android:transitionName="button_tran"
-        android:onClick="onGoClick"
+        android:onClick="onRegisterClick"
         />
     <Button
         android:id="@+id/reg_login_btn"
@@ -72,5 +72,5 @@
         android:layout_height="wrap_content"
         android:text="@string/already_have_an_account_login"
         android:transitionName="button_tran"
-        android:onClick="onLoginClick" />
+        android:onClick="toLoginPage" />
 </LinearLayout>

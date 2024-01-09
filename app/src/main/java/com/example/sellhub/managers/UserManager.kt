@@ -10,38 +10,50 @@ class UserManager {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     fun registerUser(email: String, password: String, callback: (Boolean, String?) -> Unit) {
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    updateDisplayName("test", callback) // User registered successfully
-                } else { // error occurred during user registration
-                    val exception = task.exception as FirebaseAuthException
-                    when (exception.errorCode) {
-                        "ERROR_INVALID_EMAIL" -> callback(false, "Invalid Email")
-                        "ERROR_EMAIL_ALREADY_IN_USE" -> callback(false, "Email already exists")
-                        "ERROR_WEAK_PASSWORD" -> callback(false, "Password must be at least 6 characters")
-                        else -> {
-                            callback(false, exception.message)
+        if (email == "") {
+            callback(false, "Missing email")
+        } else if (password == "") {
+            callback(false, "Missing password")
+        } else {
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        updateDisplayName("test", callback) // User registered successfully
+                    } else { // error occurred during user registration
+                        val exception = task.exception as FirebaseAuthException
+                        when (exception.errorCode) {
+                            "ERROR_INVALID_EMAIL" -> callback(false, "Invalid Email")
+                            "ERROR_EMAIL_ALREADY_IN_USE" -> callback(false, "Email already exists")
+                            "ERROR_WEAK_PASSWORD" -> callback(false, "Password must be at least 6 characters")
+                            else -> {
+                                callback(false, exception.message)
+                            }
                         }
                     }
                 }
-            }
+        }
     }
 
     fun loginUser(email: String, password: String, callback: (Boolean, String?) -> Unit) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    callback(true, null) // User logged in successfully
-                } else { // error occurred during user logging in
-                    val exception = task.exception as FirebaseAuthException
-                    when (exception.errorCode) {
-                        "ERROR_INVALID_CREDENTIAL" -> callback(false, "Wrong email or password")
-                        "ERROR_INVALID_EMAIL" -> callback(false, "Invalid email")
-                        else -> callback(false, exception.message)
+        if (email == "") {
+            callback(false, "Missing email")
+        } else if (password == "") {
+            callback(false, "Missing password")
+        } else {
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        callback(true, null) // User logged in successfully
+                    } else { // error occurred during user logging in
+                        val exception = task.exception as FirebaseAuthException
+                        when (exception.errorCode) {
+                            "ERROR_INVALID_CREDENTIAL" -> callback(false, "Wrong email or password")
+                            "ERROR_INVALID_EMAIL" -> callback(false, "Invalid email")
+                            else -> callback(false, exception.message)
+                        }
                     }
                 }
-            }
+        }
     }
 
     fun updateDisplayName(displayName: String, callback: (Boolean, String?) -> Unit) {

@@ -14,12 +14,13 @@ import java.lang.Exception
 
 class Register : AppCompatActivity() {
     private val userManager = UserManager()
+    private val mainActivity = MainActivity()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
     }
 
-    fun onGoClick(view: View) {
+    fun onRegisterClick(view: View) {
         try {
             val email = findViewById<TextInputEditText>(R.id.reg_email).text.toString()
             val password = findViewById<TextInputEditText>(R.id.reg_password).text.toString()
@@ -32,17 +33,20 @@ class Register : AppCompatActivity() {
                     Toast.makeText(this, "Registration failed: $errorMessage", Toast.LENGTH_SHORT)
                         .show()
                 }
-
             }
         } catch (e: Exception) {
             Log.d("Tag", e.message.toString());
         }
     }
 
+    fun toLoginPage(view: View) {
+        setContentView(R.layout.activity_login)
+    }
+
     fun onLoginClick(view: View) {
         try {
-            val email = findViewById<TextInputEditText>(R.id.reg_email).text.toString()
-            val password = findViewById<TextInputEditText>(R.id.reg_password).text.toString()
+            val email = findViewById<TextInputEditText>(R.id.login_email).text.toString()
+            val password = findViewById<TextInputEditText>(R.id.login_password).text.toString()
             userManager.loginUser(email, password) { isSuccess, errorMessage ->
                 if (isSuccess) {
                     val intent = Intent(this, MainActivity::class.java)
@@ -56,5 +60,7 @@ class Register : AppCompatActivity() {
         }
     }
 
-
+    fun toRegisterPage(view: View) {
+        setContentView(R.layout.activity_register)
+    }
 }

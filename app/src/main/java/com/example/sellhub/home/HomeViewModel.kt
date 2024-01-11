@@ -1,7 +1,10 @@
 package com.example.sellhub.home
 
 import androidx.lifecycle.ViewModel
+import com.example.sellhub.CardAdapter
+import com.example.sellhub.CardData
 import com.example.sellhub.newitem.Item
+import com.example.sellhub.services.StorageService
 import com.google.firebase.firestore.FirebaseFirestore
 
 class HomeViewModel : ViewModel() {
@@ -29,5 +32,22 @@ class HomeViewModel : ViewModel() {
             }
             .addOnFailureListener { exception ->
             }
+    }
+
+    fun createCardList(items: List<Item>, cardList: MutableList<CardData>, adapter: CardAdapter) {
+        cardList.clear()
+        for (item in items) {
+            val cardData = CardData(item, null)
+            cardList.add(cardData)
+            adapter.notifyItemChanged(cardList.indexOf(cardData))
+            if (item.imageId != null) {
+                StorageService.downloadImage(cardData.item.imageId.toString()) { success, imageBit ->
+                    if (success) {
+                        cardData.image = imageBit
+                        adapter.notifyItemChanged(cardList.indexOf(cardData))
+                    }
+                }
+            }
+        }
     }
 }

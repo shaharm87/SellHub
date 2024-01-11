@@ -57,20 +57,7 @@ class Home : Fragment() {
     private fun setCardsData() {
         viewModel.getItems { success, items ->
             if (success) {
-                cardList.clear()
-                for (item in items) {
-                    val cardData = CardData(item, null)
-                    cardList.add(cardData)
-                    adapter.notifyItemChanged(cardList.indexOf(cardData))
-                    if (item.imageId != null) {
-                        StorageService.downloadImage(cardData.item.imageId.toString()) { success, imageBit ->
-                            if (success) {
-                                cardData.image = imageBit
-                                adapter.notifyItemChanged(cardList.indexOf(cardData))
-                            }
-                        }
-                    }
-                }
+                viewModel.createCardList(items, cardList, adapter)
                 saveCurrentToCache()
                 swipeRefreshLayout.isRefreshing = false
             }
@@ -89,20 +76,7 @@ class Home : Fragment() {
             setCardsData()
             return
         } else {
-            cardList.clear()
-            for (item in items) {
-                val cardData = CardData(item, null)
-                cardList.add(cardData)
-                adapter.notifyItemChanged(cardList.indexOf(cardData))
-                if (item.imageId != null) {
-                    StorageService.downloadImage(cardData.item.imageId.toString()) { success, imageBit ->
-                        if (success) {
-                            cardData.image = imageBit
-                            adapter.notifyItemChanged(cardList.indexOf(cardData))
-                        }
-                    }
-                }
-            }
+            viewModel.createCardList(items, cardList, adapter)
         }
     }
 }

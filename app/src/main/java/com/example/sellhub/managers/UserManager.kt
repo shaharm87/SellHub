@@ -71,8 +71,10 @@ class UserManager {
                 if (updateTask.isSuccessful) {
                     callback(true, null);
                 } else {
-                    val exception = updateTask.exception as FirebaseAuthException
-                    callback(false, exception.message)
+                    val exception = updateTask.exception
+                    if (exception != null) {
+                        callback(false, exception.message)
+                    }
                 }
             }
     }
@@ -83,5 +85,19 @@ class UserManager {
 
     fun getCurrentUser(): FirebaseUser? {
         return auth.currentUser
+    }
+
+    fun getUserEmail(): String? {
+        val user = auth.currentUser
+        return user?.email
+    }
+
+    fun getUserDisplayName(): String? {
+        val user = auth.currentUser
+        return user?.displayName
+    }
+
+    fun logOut() {
+        auth.signOut()
     }
 }

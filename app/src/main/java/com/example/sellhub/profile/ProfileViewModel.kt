@@ -3,8 +3,6 @@ package com.example.sellhub.profile
 import androidx.lifecycle.ViewModel
 import com.example.sellhub.managers.UserManager
 import com.example.sellhub.newitem.Item
-import com.google.firebase.auth.FirebaseAuthException
-import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ProfileViewModel : ViewModel() {
@@ -26,7 +24,7 @@ class ProfileViewModel : ViewModel() {
                         val description = data["description"] as String
                         val imageId = data["imageId"] as String?
 
-                        val item = Item(displayName, title, description, imageId, null)
+                        val item = Item(displayName, title, description, imageId, null, id)
                         items.add(item)
                     }
                 }

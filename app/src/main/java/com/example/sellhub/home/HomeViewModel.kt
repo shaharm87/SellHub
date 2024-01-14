@@ -25,7 +25,7 @@ class HomeViewModel : ViewModel() {
                     val types = data["types"] as? List<String>
 
 
-                    val item = Item(displayName, title, description, imageId, types)
+                    val item = Item(displayName, title, description, imageId, types, id)
                     items.add(item)
                 }
                 callback(true, items)

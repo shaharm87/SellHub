@@ -5,5 +5,6 @@ data class Item(
     val title: String,
     val description: String,
     val imageId: String?,
-    val types: List<String>?
+    val types: List<String>?,
+    val id: String?
 )

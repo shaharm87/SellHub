@@ -46,15 +46,6 @@ class CardAdapter(private val cardList: List<CardData>) :
         }
         if (currentItem.image != null)
             holder.displayImage.setImageBitmap(currentItem.image)
-
-        // Button click listeners
-        holder.deletePostButton.setOnClickListener {
-            onDeletePost(currentItem.item.id, position)
-        }
-        holder.editPostButton.setOnClickListener {
-            onEditPost(currentItem.item.id, position)
-        }
-
     }
 
     override fun getItemCount(): Int {
@@ -68,8 +59,6 @@ class CardAdapter(private val cardList: List<CardData>) :
         val displayNameTextView: TextView = itemView.findViewById(R.id.card_user_name)
         val displayImage: ImageView = itemView.findViewById(R.id.card_image)
         val chipGroup: ChipGroup = itemView.findViewById(R.id.card_chip_group)
-        val deletePostButton: View = itemView.findViewById<View>(R.id.delete_post_button)
-        val editPostButton: View = itemView.findViewById<View>(R.id.edit_post_button)
     }
 
     fun setChipIcon(type: String, chip: Chip) {

@@ -23,8 +23,10 @@ class ProfileViewModel : ViewModel() {
                         val title = data["title"] as String
                         val description = data["description"] as String
                         val imageId = data["imageId"] as String?
+                        val types = data["types"] as? List<String>
 
-                        val item = Item(displayName, title, description, imageId, null, id)
+
+                        val item = Item(displayName, title, description, imageId, types, id)
                         items.add(item)
                     }
                 }

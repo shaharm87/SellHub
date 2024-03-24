@@ -55,27 +55,6 @@
                 android:layout_height="wrap_content"
                 app:chipSpacing="8dp"
                 app:singleSelection="false" />
-
-            <Button
-                android:id="@+id/delete_post_button"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="right"
-                app:icon="@android:drawable/ic_menu_delete"
-                app:iconGravity="top"
-                app:iconSize="30dp" />
-
-            <Button
-                android:id="@+id/edit_post_button"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="bottom|right"
-                android:layout_marginTop="-50dp"
-                android:layout_marginRight="60dp"
-                app:icon="@drawable/edit"
-                app:iconGravity="top"
-                app:iconSize="30dp" />
-
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -78,7 +78,7 @@ class AddItem : Fragment() {
         StorageService.uploadFileToFirebaseStorage(selectedImage!!) { isSuccess, imageId ->
             if (isSuccess) {
                 val item =
-                    Item(userDisplayName?.displayName, title, description, imageId, selectedTypes, null)
+                    Item(userDisplayName?.displayName, title, description, imageId, selectedTypes, null,userDisplayName?.uid)
                 viewModel.uploadItemToFirestore(item) { isSuccess, errorMessage ->
                     if (!isSuccess) {
                         Toast.makeText(
